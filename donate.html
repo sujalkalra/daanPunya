@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate - daanPunya</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        fontFamily: {
+          sans: ['Inter', 'Poppins', 'Segoe UI', 'sans-serif'],
+        },
+        extend: {
+          colors: {
+            background: {
+              light: '#F9FAFB',
+              dark: '#0F172A',
+            },
+            text: {
+              light: '#111827',
+              dark: '#F8FAFC',
+            },
+            primary: {
+              light: '#3B82F6',
+              dark: '#60A5FA',
+            },
+            accent: {
+              light: '#6366F1',
+              dark: '#A5B4FC',
+            },
+            border: {
+              light: '#E5E7EB',
+              dark: '#334155',
+            }
+          },
+          boxShadow: {
+            soft: '0 4px 24px 0 rgba(44,62,80,0.06)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+    }
+    .transition-bg {
+      transition: background 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-bg min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="w-full shadow-soft bg-white/80 dark:bg-background-dark/80 backdrop-blur sticky top-0 z-30 transition-bg">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center rounded-full bg-primary-light dark:bg-primary-dark p-2">
+          <i data-lucide="heart-handshake" class="w-6 h-6 text-white"></i>
+        </span>
+        <span class="font-bold text-xl tracking-tight">daanPunya</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="px-3 py-2 rounded-lg font-medium hover:bg-primary-light/10 dark:hover:bg-primary-dark/10 transition-colors">Home</a>
+        <a href="causes.html" class="px-3 py-2 rounded-lg font-medium hover:bg-primary-light/10 dark:hover:bg-primary-dark/10 transition-colors">Causes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Donation Card -->
+  <main class="flex-1 flex flex-col items-center justify-center px-4 py-16">
+    <div class="bg-white dark:bg-background-dark rounded-2xl shadow-soft p-8 border border-border-light dark:border-border-dark max-w-md w-full text-center">
+      <h1 class="text-2xl font-bold mb-4">Complete Your Donation</h1>
+      <p class="mb-6 text-gray-600 dark:text-gray-300">Thank you for choosing to support this cause!</p>
+
+      <!-- User Inputs -->
+      <div class="mb-4 text-left">
+        <label for="donor-name" class="block text-sm font-medium mb-1">Your Name</label>
+        <input type="text" id="donor-name" class="w-full p-2 border rounded-lg bg-white dark:bg-background-dark border-border-light dark:border-border-dark" required />
+      </div>
+      <div class="mb-6 text-left">
+        <label for="donor-email" class="block text-sm font-medium mb-1">Your Email</label>
+        <input type="email" id="donor-email" class="w-full p-2 border rounded-lg bg-white dark:bg-background-dark border-border-light dark:border-border-dark" required />
+      </div>
+
+      <!-- Display Amount -->
+      <div class="mb-8">
+        <span class="text-lg">Amount:</span>
+        <span id="donation-amount" class="text-2xl font-bold text-primary-light dark:text-primary-dark"></span>
+      </div>
+
+      <!-- Pay Button -->
+      <button id="pay-btn" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary-light dark:bg-primary-dark text-white font-semibold text-lg shadow-soft hover:scale-105 hover:bg-accent-light dark:hover:bg-accent-dark transition-all duration-200">
+        <i data-lucide="credit-card" class="w-5 h-5"></i>
+        Pay Now
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-white dark:bg-background-dark border-t border-border-light dark:border-border-dark py-6 mt-auto transition-bg">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 gap-4">
+      <div class="flex items-center gap-2">
+        <i data-lucide="heart" class="w-5 h-5 text-accent-light dark:text-accent-dark"></i>
+        <span class="text-sm">&copy; 2025 daanPunya. Built with love for impact.</span>
+      </div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- 🔐 Load environment values (generated via generate-config.js) -->
+  <script src="assets/env-config.js"></script>
+  <script>
+    const RAZORPAY_KEY = window.ENV.RAZORPAY_KEY;
+    const GOOGLE_SCRIPT_URL = window.ENV.GOOGLE_SCRIPT_URL;
+
+    function getAmount() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('amount') || '0';
+    }
+
+    const amount = getAmount();
+    document.getElementById('donation-amount').textContent = `₹${amount}`;
+
+    document.getElementById('pay-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("donor-name").value.trim();
+      const email = document.getElementById("donor-email").value.trim();
+
+      if (!name || !email) {
+        alert("Please enter your name and email.");
+        return;
+      }
+
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: amount * 100,
+        currency: "INR",
+        name: "daanPunya",
+        description: "Donation via daanPunya",
+        image: "https://yourdomain.com/logo.png", // Optional logo
+        prefill: { name, email },
+        theme: { color: "#3B82F6" },
+
+        handler: function (response) {
+          const params = new URLSearchParams({
+            name,
+            email,
+            cause: "Donation via daanPunya",
+            amount,
+            payment_id: response.razorpay_payment_id
+          });
+
+          fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params.toString()
+          })
+          .then(() => {
+            window.location.href = "thankyou.html?payment_id=" + response.razorpay_payment_id;
+          })
+          .catch((err) => {
+            console.error("Logging failed:", err);
+            alert("Payment done but logging failed.");
+            window.location.href = "thankyou.html?payment_id=" + response.razorpay_payment_id;
+          });
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>

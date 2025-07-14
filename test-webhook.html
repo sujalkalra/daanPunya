@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="send()">Send Test</button>
+<script>
+function send() {
+  const params = new URLSearchParams({
+    name: "Test",
+    email: "test@example.com",
+    cause: "Test Cause",
+    amount: "100",
+    payment_id: "test123"
+  });
+  fetch("https://script.google.com/macros/s/AKfycby3ucRaOGrOOiUqdKwKXku3ec-JsMJw-QlITmXlHx-5l36xGk9e-zY4I2YKVpmyMLMh/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  }).then(r => r.text()).then(alert).catch(alert);
+}
+</script>
+</body>
+</html>

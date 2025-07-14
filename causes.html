@@ -1,0 +1,167 @@
+<!-- causes.html -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Causes - daanPunya</title>
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        fontFamily: {
+          sans: ['Inter', 'Poppins', 'Segoe UI', 'sans-serif'],
+        },
+        extend: {
+          colors: {
+            background: {
+              light: '#F9FAFB',
+              dark: '#0F172A',
+            },
+            text: {
+              light: '#111827',
+              dark: '#F8FAFC',
+            },
+            primary: {
+              light: '#3B82F6',
+              dark: '#60A5FA',
+            },
+            accent: {
+              light: '#6366F1',
+              dark: '#A5B4FC',
+            },
+            border: {
+              light: '#E5E7EB',
+              dark: '#334155',
+            }
+          },
+          boxShadow: {
+            soft: '0 4px 24px 0 rgba(44,62,80,0.06)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif; }
+    .transition-bg { transition: background 0.3s, color 0.3s; }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-bg min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="w-full shadow-soft bg-white/80 dark:bg-background-dark/80 backdrop-blur sticky top-0 z-30 transition-bg">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center rounded-full bg-primary-light dark:bg-primary-dark p-2">
+          <i data-lucide="heart-handshake" class="w-6 h-6 text-white"></i>
+        </span>
+        <span class="font-bold text-xl tracking-tight">daanPunya</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="px-3 py-2 rounded-lg font-medium hover:bg-primary-light/10 dark:hover:bg-primary-dark/10 transition-colors">Home</a>
+        <a href="causes.html" class="px-3 py-2 rounded-lg font-medium hover:bg-primary-light/10 dark:hover:bg-primary-dark/10 transition-colors">Causes</a>
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="ml-2 p-2 rounded-lg hover:bg-accent-light/10 dark:hover:bg-accent-dark/10 transition-colors">
+          <i id="theme-toggle-icon" data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page-specific content starts here -->
+  <main class="flex-1 max-w-6xl mx-auto px-4 py-16">
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-8 text-center">Support a Cause</h1>
+    <div id="causes-list" class="grid gap-8 md:grid-cols-3"></div>
+  </main>
+  <!-- Modal for Description -->
+  <div id="desc-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+    <div class="bg-white dark:bg-background-dark rounded-2xl shadow-soft max-w-lg w-full p-6 relative">
+      <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-primary-light dark:hover:text-primary-dark">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <img id="modal-image" src="" alt="Cause Main Image" class="w-full h-56 object-cover rounded-xl mb-4 border border-border-light dark:border-border-dark">
+      <h2 id="modal-title" class="text-2xl font-bold mb-2"></h2>
+      <p id="modal-desc" class="text-gray-700 dark:text-gray-300"></p>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="w-full bg-white dark:bg-background-dark border-t border-border-light dark:border-border-dark py-6 mt-auto transition-bg">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 gap-4">
+      <div class="flex items-center gap-2">
+        <i data-lucide="heart" class="w-5 h-5 text-accent-light dark:text-accent-dark"></i>
+        <span class="text-sm">&copy; 2025 daanPunya. Built with love for impact.</span>
+      </div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors" aria-label="Twitter"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+        <a href="#" class="hover:text-primary-light dark:hover:text-primary-dark transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global JS -->
+  <script src="assets/main.js"></script>
+  <script>
+    let causesData = [];
+    fetch('data/causes.json')
+      .then(response => response.json())
+      .then(causes => {
+        causesData = causes;
+        const container = document.getElementById('causes-list');
+        container.innerHTML = causes.map((cause, idx) => `
+          <div class="bg-white dark:bg-background-dark rounded-2xl shadow-soft p-6 border border-border-light dark:border-border-dark transition-bg flex flex-col">
+            <i data-lucide="${cause.icon}" class="w-10 h-10 text-primary-light dark:text-primary-dark mb-4"></i>
+            <h3 class="font-semibold text-xl mb-2">${cause.title}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">${cause.description}</p>
+            <div class="flex gap-2 mt-auto">
+              <a href="donate.html?amount=${cause.amount}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-light dark:bg-primary-dark text-white font-semibold shadow-soft hover:scale-105 hover:bg-accent-light dark:hover:bg-accent-dark transition-all duration-200">
+                <i data-lucide="credit-card" class="w-5 h-5"></i>
+                Donate ₹${cause.amount}
+              </a>
+              <button data-idx="${idx}" class="desc-btn inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-accent-light dark:bg-accent-dark text-white font-semibold shadow-soft hover:scale-105 hover:bg-primary-light dark:hover:bg-primary-dark transition-all duration-200">
+                <i data-lucide="info" class="w-5 h-5"></i>
+                Description
+              </button>
+            </div>
+          </div>
+        `).join('');
+        lucide.createIcons();
+
+        // Add event listeners for description buttons
+        document.querySelectorAll('.desc-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = this.getAttribute('data-idx');
+            const cause = causesData[idx];
+            document.getElementById('modal-image').src = cause.mainImage;
+            document.getElementById('modal-title').textContent = cause.title;
+            document.getElementById('modal-desc').textContent = cause.detailedDescription;
+            document.getElementById('desc-modal').classList.remove('hidden');
+            lucide.createIcons();
+          });
+        });
+      })
+      .catch(() => {
+        document.getElementById('causes-list').innerHTML = '<div class="col-span-3 text-center text-red-500">Failed to load causes.</div>';
+      });
+
+    // Modal close logic
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('desc-modal').classList.add('hidden');
+      });
+      // Optional: Close modal on background click
+      document.getElementById('desc-modal').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
