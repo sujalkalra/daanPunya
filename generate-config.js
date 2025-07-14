@@ -5,8 +5,8 @@ dotenv.config();
 
 const configJS = `
 window.ENV = {
-  RAZORPAY_KEY: "${process.env.RAZORPAY_KEY}",
-  GOOGLE_SCRIPT_URL: "${process.env.GOOGLE_SCRIPT_URL}"
+  RAZORPAY_KEY: "${process.env.VITE_RAZORPAY_KEY}",
+  GOOGLE_SCRIPT_URL: "${process.env.VITE_GOOGLE_SCRIPT_URL}"
 };
 `;
 
