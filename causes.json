@@ -1,0 +1,20 @@
+[
+  {
+    "icon": "waves",
+    "title": "Clean the River",
+    "description": "Sponsor a worker to help clean our local river and restore its natural beauty. Your donation funds equipment and fair wages for youth volunteers.",
+    "amount": 500
+  },
+  {
+    "icon": "book-open",
+    "title": "Sponsor School Kits",
+    "description": "Help underprivileged children get access to essential school supplies. Each donation provides a kit with books, stationery, and a backpack.",
+    "amount": 300
+  },
+  {
+    "icon": "users",
+    "title": "Community Health Camp",
+    "description": "Fund a youth-led health camp providing free checkups and medicines to the needy. Your support covers medical supplies and logistics.",
+    "amount": 700
+  }
+]
